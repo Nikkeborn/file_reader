@@ -1,3 +1,7 @@
+def str_insert(orig_str, insert):
+    str_len=len(orig_str)
+    new_str=orig_str[:str_len-4]+insert+orig_str[str_len-4:] 
+    return new_str  
 def uni_el_calc(li):
     dict={}
     for di in li:
@@ -64,31 +68,51 @@ if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser(description='file_word_calc')
     parser.add_argument('file_path', type=str, help='Input file path')
+    parser.set_defaults(v=False)
 #################################################################    
     subparsers=parser.add_subparsers(help='Script command for add results to file')
 #################################################################    
     parser_f=subparsers.add_parser('f')
-    parser_f.add_argument('rf', action='store_true', help='Input \'-f\' for result file')
-    parser_f.add_argument('-rfdir',action='store', dest='rfdir', type=str, nargs='?', help='Input directory for result file')
+    parser_f.set_defaults(v=True)
+    parser_f.add_argument('-d','--dir',action='store', dest='rfdir', type=str, nargs='?', default='', help='Input directory for result file')
 #################################################################    
     args = parser.parse_args()
+##############################################################    
     filedict=file_word_calc(args.file_path)
     print(filedict)
 ###########debug##########    
     print(args)
-#    print(args.rf)
-#    print(args.rfdir)
+    print(args._get_kwargs())
+    print(args.v)
 ###########debug##########
 ##########################    
-    if args:
-        print ('\n\n\n')
-        with open(args.file_path, 'r', encoding='utf-8') as tf:
-            print (tf.name)
+    if args.v==True:        
+        print ('\n\n\n')        
+        if not args.rfdir:
+            res_file_name=str_insert(args.file_path, '_calc')
+            print(res_file_name)
+            with open(res_file_name, 'w', encoding='utf-8') as tf:
+                print(tf.name)
+                print(tf)    
+        else:
+            import os
+            base=os.path.basename(args.file_path)
+            print(f'################{base}#######################')
+            res_base_name=str_insert(base, '_calc')
+            print(f'################{res_base_name}#######################')
+            if os.path.isdir(args.rfdir):
+                with open(f'{args.rfdir}\\{res_base_name}', 'w', encoding='utf-8') as tf:                
+                    print(tf.name)
+                    print(tf)    
+                print(args.rfdir)
+                print(f'###########{args.rfdir}\\{res_base_name}#######################')
+            else:
+                print(f'{args.rfdir} directory not found')
 ##########################            
 ############debug#########        
         print(args)
-#        print(args.rf)
-#        print(args.rfdir)
+        print(args.v)
+        print(args.rfdir)
 ###########debug##########
 
 
