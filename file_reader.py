@@ -50,20 +50,20 @@ def file_word_calc(file):
 #    print(len(lettli))
 #    print('\n\n')
 #    ################################
-#    print('\n\n')
 #    print(lettstr)
 #    print(type(lettstr))
 #    print(len(lettstr))
+#    print('\n\n')    
 #    ################################
-#    print('\n\n')
 #    print(wordli)
 #    print(type(wordli))
 #    print(len(wordli))
+#    print('\n\n')    
 #    ###################################
-#    print('\n\n')
 #    print(wordict)
 #    print(type(wordict))
 #    print(len(wordict))
+#    print('\n\n')    
 #    ##############debug##################
     return wordict
 ###############################console_launch##########################################
@@ -88,42 +88,37 @@ if __name__=='__main__':
     filedict=file_word_calc(args.file_path)
     print(filedict)
 ###########debug##########    
-    print(args)
-    print(args._get_kwargs())
-    print(args.v)
+#    print(args)
+#    print(args._get_kwargs())
+#    print(args.v)
 ###########debug##########
 ##########################    
-    if args.v==True:        
-        print ('\n\n\n')        
+    if args.v==True: 
         if not args.rfdir:
             res_file_name=str_insert(args.file_path, '_calc')
-            print(res_file_name)
             dict_to_file (res_file_name, filedict)
-            with open(res_file_name, 'r', encoding='utf-8') as tf:
-                print(tf.name)
-                print(tf)    
+            ###########debug##########
+#            print(f'###################{res_file_name}####################')
+            ###########debug##########      
         else:
             import os
-            base=os.path.basename(args.file_path)
-            print(f'###################{base}#############################')
-            res_base_name=str_insert(base, '_calc')
-            print(f'################{res_base_name}#######################')
+            base=os.path.basename(args.file_path)            
+            res_base_name=str_insert(base, '_calc')            
             res_fin_name=f'{args.rfdir}\\{res_base_name}'
-            print(f'################{res_fin_name}########################')
+            ###########debug##########
+#            print(f'###################{base}#############################')
+#            print(f'################{res_base_name}#######################')    
+#            print(f'################{res_fin_name}########################')
+            ###########debug##########      
             if os.path.isdir(args.rfdir):
-                dict_to_file (res_fin_name, filedict)
-                with open(res_fin_name, 'r', encoding='utf-8') as tf:                
-                    print(tf.name)
-                    print(tf)    
-                print(args.rfdir)                
+                dict_to_file (res_fin_name, filedict)                
             else:
-                print(f'{args.rfdir} directory not found')
-                print(args.rfdir)
+                print(f'{args.rfdir} directory not found')                
 ##########################            
 ############debug#########        
-        print(args)
-        print(args.v)
-        print(args.rfdir)
+#        print(args)
+#        print(args.v)
+#        print(args.rfdir)
 ###########debug##########
 
 
