@@ -98,23 +98,27 @@ if __name__=='__main__':
         if not args.rfdir:
             res_file_name=str_insert(args.file_path, '_calc')
             print(res_file_name)
-            with open(res_file_name, 'w', encoding='utf-8') as tf:
+            dict_to_file (res_file_name, filedict)
+            with open(res_file_name, 'r', encoding='utf-8') as tf:
                 print(tf.name)
                 print(tf)    
         else:
             import os
             base=os.path.basename(args.file_path)
-            print(f'################{base}#######################')
+            print(f'###################{base}#############################')
             res_base_name=str_insert(base, '_calc')
             print(f'################{res_base_name}#######################')
+            res_fin_name=f'{args.rfdir}\\{res_base_name}'
+            print(f'################{res_fin_name}########################')
             if os.path.isdir(args.rfdir):
-                with open(f'{args.rfdir}\\{res_base_name}', 'w', encoding='utf-8') as tf:                
+                dict_to_file (res_fin_name, filedict)
+                with open(res_fin_name, 'r', encoding='utf-8') as tf:                
                     print(tf.name)
                     print(tf)    
-                print(args.rfdir)
-                print(f'###########{args.rfdir}\\{res_base_name}#######################')
+                print(args.rfdir)                
             else:
                 print(f'{args.rfdir} directory not found')
+                print(args.rfdir)
 ##########################            
 ############debug#########        
         print(args)
