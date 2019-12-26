@@ -2,6 +2,10 @@ def str_insert(orig_str, insert):
     str_len=len(orig_str)
     new_str=orig_str[:str_len-4]+insert+orig_str[str_len-4:] 
     return new_str  
+def dict_to_file (f_name, di):
+    with open(f_name,'w',encoding='utf-8') as file:
+        for key,val in di.items():
+            file.write(f'{key}:{val}\n')
 def uni_el_calc(li):
     dict={}
     for di in li:
@@ -29,7 +33,7 @@ def file_word_calc(file):
         else:
             lettli.append(le)
     lettstr=''.join(lettli)
-    wordli=lettstr.split(' ')
+    wordli=sorted(lettstr.split(' '))
     wordict=uni_el_calc(wordli)
 #    ##########debug######################
 #    #print(ftemp)
@@ -62,8 +66,9 @@ def file_word_calc(file):
 #    print(len(wordict))
 #    ##############debug##################
     return wordict
-#filedict=file_word_calc('')
-#print(filedict)
+###############################console_launch##########################################
+###############################console_launch##########################################
+###############################console_launch##########################################
 if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser(description='file_word_calc')
@@ -77,6 +82,8 @@ if __name__=='__main__':
     parser_f.add_argument('-d','--dir',action='store', dest='rfdir', type=str, nargs='?', default='', help='Input directory for result file')
 #################################################################    
     args = parser.parse_args()
+##############################################################
+##############################################################
 ##############################################################    
     filedict=file_word_calc(args.file_path)
     print(filedict)
