@@ -64,25 +64,34 @@ if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser(description='file_word_calc')
     parser.add_argument('file_path', type=str, help='Input file path')
-    parser.add_argument('-f', '--file', action="store_true", dest="rf", required=False, help='Input \'-f\' or \'--file\' to have a result file in the current directory')
-    parser.add_argument('rfdir',action="store", type=str, nargs='?', help='Input directory for result file')
-    args = parser.parse_args()    
+#################################################################    
+    subparsers=parser.add_subparsers(help='Script command for add results to file')
+#################################################################    
+    parser_f=subparsers.add_parser('f')
+    parser_f.add_argument('rf', action='store_true', help='Input \'-f\' for result file')
+    parser_f.add_argument('-rfdir',action='store', dest='rfdir', type=str, nargs='?', help='Input directory for result file')
+#################################################################    
+    args = parser.parse_args()
     filedict=file_word_calc(args.file_path)
     print(filedict)
-#################debug#############    
+###########debug##########    
     print(args)
-    print(args.rf)
-    print(args.rfdir)
-###############debug###############
-###################################    
-    if args.rf:
+#    print(args.rf)
+#    print(args.rfdir)
+###########debug##########
+##########################    
+    if args:
         print ('\n\n\n')
         with open(args.file_path, 'r', encoding='utf-8') as tf:
             print (tf.name)
-####################################            
-##############debug#################            
-        print(args.rfdir)
-##############debug#################                
+##########################            
+############debug#########        
+        print(args)
+#        print(args.rf)
+#        print(args.rfdir)
+###########debug##########
+
+
 
 
 
